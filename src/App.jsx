@@ -38,43 +38,63 @@ function App() {
     fetchUsers('https://mi-api.com/home');}, []);
 
   if (status === 'loading') {
-    return <div>Cargando...</div>;
+    return <div className="spinner-container">
+            <div className="spinner"></div>
+            <p>Cargando datos...</p>
+          </div>;
   }
   
   if (status === 'error') {
     return (
-      <div>
-        <h1>Prueba de Concepto de Mock Service Worker</h1>
-        <p>Hubo un error: {error}</p>
-        <button onClick={() => fetchUsers('https://mi-api.com/home')}>Reintentar</button>
+      <div className="app-container">
+        <header className="header">
+          <h1 className="title">Prueba de Concepto de Mock Service Worker</h1>
+          <p className="subtitle">Simulación de respuestas </p>
+        </header>
+        <div className="card error fade-in">
+          <h2>❌ Hubo un error</h2>
+          <p>{error}</p>
+          <button onClick={() => fetchUsers('https://mi-api.com/home')} className="btn"> Inicio </button>
+        </div>
       </div>
     );
   }
   if (status === 'success') {
     if(type === 'home'){
       return (
-        <div className="App">
-          <h1>Prueba de Concepto de Mock Service Worker</h1>
-          <h2>Página de Inicio</h2>
-          <p>Bienvenido a la página de inicio. Usa los botones para cargar diferentes datos.</p>
-          <button onClick={() => fetchUsers('https://mi-api.com/users')}>Cargar usuarios</button>
-          <button onClick={() => fetchUsers('https://mi-api.com/users-lento')}>Cargar lento</button>
-          <button onClick={() => fetchUsers('https://mi-api.com/non-existent-resource')}>Cargar 404</button>
-          <button onClick={() => fetchUsers('https://mi-api.com/server-error')}>Cargar 500</button>
+        <div className="app-container">
+          <header className="header">
+            <h1 className="title">Prueba de Concepto de Mock Service Worker</h1>
+            <p className="subtitle">Simulación de respuestas </p>
+          </header>
+          <main className="main">
+            <div className="btn-group">
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users")}> Cargar usuarios </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users-lento")} > Carga de usuarios lenta (2s)
+              </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/non-existent-resource")} > Cargar error de servidor </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/server-error")}> Cargar error usuarios </button>
+            </div>
+          </main>
         </div>
       );
     }  
     else if(type === 'userList'){
       return (
-        <div className="App">
-          <h1>Prueba de Concepto de Mock Service Worker</h1>
-          <h2>Lista de Usuarios (datos simulados)</h2>
-          <ul className="user-list">
-            {users && users.map((user) => (
-              <li key={user.id}>Id: {user.id} - Nombre: {user.name}</li>
-            ))}
-          </ul>
-          <button onClick={() => fetchUsers('https://mi-api.com/home')}>Inicio</button>
+        <div className="app-container">
+          <header className="header">
+            <h1 className="title">Prueba de Concepto de Mock Service Worker</h1>
+            <p className="subtitle">Simulación de respuestas </p>
+          </header>
+          <div className="card fade-in">
+            <h2>👥 Lista de Usuarios (datos simulados)</h2>
+            <ul className="user-list">
+              {users.map((user) => (
+                <li key={user.id}>{user.name}</li>
+              ))}
+            </ul>
+            <button onClick={() => fetchUsers('https://mi-api.com/home')} className="btn"> Inicio </button>
+          </div>
         </div>
       );
     }
