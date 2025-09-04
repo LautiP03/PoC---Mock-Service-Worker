@@ -1,1 +1,1 @@
-# PoC---Mock-Service-Worker
+# PoC-Mock-Service-Worker
