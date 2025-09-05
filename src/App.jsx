@@ -6,9 +6,12 @@ function App() {
   const [status, setStatus] = useState('loading');
   const [type, setType] = useState('');
   const [error, setError] = useState('');
+  const [search, setSearch] = useState('');
 
-  const fetchUsers = async (url) => {
-    setStatus('loading');
+  const fetchUsers = async (url, skipLoading = false) => {
+    if (!skipLoading) {
+      setStatus('loading');
+    }
     setError('');
     
     try {
@@ -38,19 +41,19 @@ function App() {
 
   // LOADING 
   if (status === 'loading') {
-  return (
-    <div className="app-container">
-      <header className="header">
-        <h1 className="title">Prueba de Concepto de Mock Service Worker</h1>
-        <p className="subtitle">Simulación de respuestas</p>
-      </header>
-      <div className="spinner-container">
-        <div className="dual-ring"></div>
-        <p className="loading-text">Cargando datos...</p>
+    return (
+      <div className="app-container">
+        <header className="header">
+          <h1 className="title">Prueba de Concepto de Mock Service Worker</h1>
+          <p className="subtitle">Simulación de respuestas</p>
+        </header>
+        <div className="spinner-container">
+          <div className="dual-ring"></div>
+          <p className="loading-text">Cargando datos...</p>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   // SUCCESS
   if (status === 'success') {
@@ -81,6 +84,18 @@ function App() {
           </header>
           <div className="card fade-in">
             <h2>👥 Lista de Usuarios (datos simulados)</h2>
+            
+            <input 
+              type="text" 
+              placeholder="Buscar usuario..." 
+              className="search-input"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                fetchUsers(`https://mi-api.com/users?search=${e.target.value}`, true);
+              }}
+            />
+
             <ul className="user-list">
               {users.map((user) => (
                 <li key={user.id}>{user.name}</li>
