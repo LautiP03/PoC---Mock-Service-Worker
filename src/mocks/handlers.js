@@ -36,13 +36,13 @@ export const handlers = [
   // Handler para simular un 404
   http.get('https://mi-api.com/non-existent-resource', () => {
     return HttpResponse.json(
-      { error: 'Usuario no encontrado (ok)' }, 
+      { error: 'Usuario no encontrado' }, 
       { status: 404 });
   }),
   // Handler para simular un 500
   http.get('https://mi-api.com/server-error', () => {
     return HttpResponse.json(
-      { error: 'Algo salió mal en el servidor (ok)' }, 
+      { error: 'Algo salió mal en el servidor' }, 
       { status: 500 });
   }),
 ];
