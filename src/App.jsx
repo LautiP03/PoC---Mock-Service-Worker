@@ -7,12 +7,14 @@ function App() {
   const [type, setType] = useState('');
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
+  const [allowSearch, setAllowSearch] = useState(false); // bandera de búsqueda
 
-  const fetchUsers = async (url, skipLoading = false) => {
+  const fetchUsers = async (url, skipLoading = false, enableSearch = false) => {
     if (!skipLoading) {
       setStatus('loading');
     }
     setError('');
+    setAllowSearch(enableSearch); // Aca se define si se habilita o no el buscador
     
     try {
       const response = await fetch(url);
@@ -66,8 +68,8 @@ function App() {
           </header>
           <main className="main">
             <div className="btn-group">
-              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users")}> Cargar usuarios </button>
-              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users-lento")} > Carga de usuarios lenta (2s) </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users", false, true)} > Cargar usuarios </button> 
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users-lento", false, false)} > Carga de usuarios lenta (2s) </button>
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/non-existent-resource")} > Cargar error de servidor </button>
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/server-error")}> Cargar error usuarios </button>
             </div>
@@ -85,16 +87,18 @@ function App() {
           <div className="card fade-in">
             <h2>👥 Lista de Usuarios (datos simulados)</h2>
             
-            <input 
-              type="text" 
-              placeholder="Buscar usuario..." 
-              className="search-input"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                fetchUsers(`https://mi-api.com/users?search=${e.target.value}`, true);
-              }}
-            />
+            {allowSearch && ( // solo se muestra si allowSearch = true
+              <input 
+                type="text" 
+                placeholder="Buscar usuario..." 
+                className="search-input"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  fetchUsers(`https://mi-api.com/users?search=${e.target.value}`, true, true);
+                }}
+              />
+            )}
 
             <ul className="user-list">
               {users.map((user) => (
