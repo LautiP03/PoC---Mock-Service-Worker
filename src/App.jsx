@@ -70,8 +70,8 @@ function App() {
             <div className="btn-group">
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users", false, true)} > Cargar usuarios </button> 
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users-lento", false, false)} > Carga de usuarios lenta (2s) </button>
-              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/non-existent-resource")} > Cargar error de servidor </button>
-              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/server-error")}> Cargar error usuarios </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/non-existent-resource")} > Cargar error usuarios </button>
+              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/server-error")}> Cargar error de servidor </button>
             </div>
           </main>
         </div>
@@ -87,7 +87,7 @@ function App() {
           <div className="card fade-in">
             <h2>👥 Lista de Usuarios (datos simulados)</h2>
             
-            {allowSearch && ( // solo se muestra si allowSearch = true
+            {allowSearch && ( 
               <input 
                 type="text" 
                 placeholder="Buscar usuario..." 
