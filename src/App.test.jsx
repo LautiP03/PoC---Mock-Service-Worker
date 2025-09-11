@@ -17,7 +17,6 @@ describe('App', () => {
       expect(screen.getByText('Prueba de Concepto de Mock Service Worker')).toBeInTheDocument();
     });
 
-    // También puedes verificar que el otro usuario esté presente
     expect(screen.getByText('Prueba de Concepto de Mock Service Worker')).toBeInTheDocument();
   });
 });
