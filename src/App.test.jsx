@@ -16,7 +16,5 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.getByText('Prueba de Concepto de Mock Service Worker')).toBeInTheDocument();
     });
-
-    expect(screen.getByText('Prueba de Concepto de Mock Service Worker')).toBeInTheDocument();
   });
 });
