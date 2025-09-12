@@ -68,7 +68,7 @@ function App() {
           </header>
           <main className="main">
             <div className="btn-group">
-              <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users", false, true)} > Cargar usuarios </button> 
+              <button name='Cargar usuarios' className="btn" onClick={() => fetchUsers("https://mi-api.com/users", false, true)} > Cargar usuarios </button> 
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/users-lento", false, false)} > Carga de usuarios lenta (2s) </button>
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/non-existent-resource")} > Cargar error usuarios </button>
               <button className="btn" onClick={() => fetchUsers("https://mi-api.com/server-error")}> Cargar error de servidor </button>
